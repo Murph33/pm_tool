@@ -7,4 +7,12 @@ class Project < ActiveRecord::Base
   def self.search term
     Project.where("title ILIKE :term OR description ILIKE :term", {term: "%#{term}%"})
   end
+
+
+
+
+
+
+
+
 end

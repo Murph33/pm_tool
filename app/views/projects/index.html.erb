@@ -9,14 +9,30 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% @projects.each do |project| %>
 
-  <div>
-    <ul>
-      <li><%= project.title %></li>
-      <li><%= project.description %></li>
-      <li>Due: <%= project.due_date %></li>
-    </ul>
-  </div>
+
+
+
+
+<% @projects.each_with_index do |project, i| %>
+<%= link_to project.title, project %><br>
+
+
 
 <% end %>
+
+<% unless @page == 1 %>
+<%= link_to "Previous", projects_path({page: @page-1, search: params[:search]}), method: :get %>
+<% end %>
+
+<% unless @page * 10 >= @total_projects.length %>
+<%= link_to "Next", projects_path({page: @page+1, search: params[:search]}), method: :get %>
+<% end %>
+<%#  <div>
+<%#    <ul>
+<%#      <li><%= project.title %></li>
+<%#      <li><%= project.description %></li>
+<%#      <li>Due: <%= project.due_date %></li>
+<%#    </ul>
+<%#  </div>
+<%# %>
