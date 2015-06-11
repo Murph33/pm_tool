@@ -1,0 +1,22 @@
+<h1> Projects</h1>
+
+<%= form_tag "search" do %>
+
+  <div>
+    <%= label_tag :search %>
+    <%= text_field_tag :search %>
+  </div>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% @projects.each do |project| %>
+
+  <div>
+    <ul>
+      <li><%= project.title %></li>
+      <li><%= project.description %></li>
+      <li>Due: <%= project.due_date %></li>
+    </ul>
+  </div>
+
+<% end %>

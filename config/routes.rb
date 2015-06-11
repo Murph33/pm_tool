@@ -3,4 +3,8 @@ Rails.application.routes.draw do
 
   get "/home/about" => "home#about"
 
+  resources :projects
+
+  post "search" => "projects#index"
+
 end

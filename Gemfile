@@ -38,6 +38,7 @@ group :development, :test do
   gem "hirb"
   gem "awesome_print"
   gem "interactive_editor"
+  gem "faker"
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
