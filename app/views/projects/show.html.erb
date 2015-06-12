@@ -1,0 +1,43 @@
+<h1><%= @project.title %></h1>
+
+<h3><%= @project.description %></h3>
+
+Due: <%= formatted_date @project.due_date%>
+
+<br><br>
+<div> <%= link_to "Edit", edit_project_path(@project) %>
+      <%= link_to "Delete", project_path(@project),
+      method: :delete, data: {confirm: "Do you really want to delete this project?"} %>
+</div>
+Add a task to this project?
+<br><br>
+<% if @task.errors.any? %>
+  <% @task.errors.full_messages.each do |msg| %>
+    <%= msg %>
+  <% end %>
+<% end %>
+
+<%= form_for [@project, @task] do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :due_date %>
+    <%= f.datetime_select :due_date, start_year: Date.today.year %>
+  </div>
+  <%= f.submit %>
+
+<% end %>
+
+<% @tasks.each do |task| %>
+
+  <h4><%= task.title %></h4>
+  <p><%= task.description %></p>
+  <p>Due: <%= formatted_date task.due_date %></p>
+<hr>
+<% end %>
