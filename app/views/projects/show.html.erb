@@ -24,7 +24,7 @@ Add a task to this project?
   </div>
   <div>
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
   <div>
     <%= f.label :due_date %>
@@ -40,4 +40,41 @@ Add a task to this project?
   <p><%= task.description %></p>
   <p>Due: <%= formatted_date task.due_date %></p>
 <hr>
+<% end %>
+
+<h4> Have something to talk about?</h4>
+
+<%= form_for [@project, @discussion] do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+
+<h3> Discussions</h3>
+
+<% @discussions.each do |discussion| %>
+<hr>
+  <div>
+    <h2>
+      <%= discussion.title %>
+    </h2>
+  </div>
+  <div>
+    <h5>
+      <%= discussion.description %>
+    </h5>
+  </div>
+  <%= link_to "See Comments", project_discussion_path(@project, discussion) %>
+  <%= link_to "Edit", edit_project_discussion_path(@project, discussion) %>
+  <%= link_to "Delete", project_discussion_path(@project, discussion), method: :delete,
+                      data: {confirm: "Are you sure you want to delete this discussion?  All attached comments will also be permanently deleted."}%>
+
+
 <% end %>

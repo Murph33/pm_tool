@@ -6,9 +6,14 @@ Rails.application.routes.draw do
 
 
   resources :projects do
-    resources :tasks
+    resources :tasks, :discussions
   end
 
   post "search" => "projects#index"
+
+  resources :discussions, only: [] do
+    resources :comments
+  end
+
 
 end

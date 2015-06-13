@@ -1,0 +1,28 @@
+<h1> <%= @discussion.title %></h1>
+
+<h3> <%= @discussion.description %></h3>
+
+
+
+
+
+<h5> Comments?</h5>
+
+<%= form_for [@discussion, @comment] do |f| %>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+
+<% end %>
+
+<% @comments.each do |comment| %>
+  <hr>
+  <p><%= comment.body %></p>
+  <%= link_to "Edit", edit_discussion_comment_path(@discussion, comment) %>
+  <%= link_to "Delete", discussion_comment_path(@discussion, comment),
+      method: :delete, data: {confirm: "Do you really want to delete this comment?"}%>
+      
+<% end %>
