@@ -57,8 +57,8 @@ class ProjectsController < ApplicationController
     @task = Task.new
     @comment = Comment.new
     @discussion = Discussion.new
-    @tasks = @project.tasks
+    @tasks_done = Task.where("done = true AND project_id = #{params[:id]}")
+    @tasks_not_done = Task.where("done = false AND project_id = #{params[:id]}")
     @discussions = @project.discussions
-    @comments = @discussion.comments
   end
 end

@@ -12,6 +12,7 @@ class DiscussionsController < ApplicationController
     @project = Project.find params[:project_id]
     @task = Task.new
     @tasks = @project.tasks
+    @discussions = @project.discussions
     @discussion = Discussion.new discussion_params
     @discussion.project = @project
     if @discussion.save
@@ -32,6 +33,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find params[:id]
     project = Project.find @discussion.project_id
     discussion_params = params.require(:discussion).permit(:title, :description)
+    @discussions = project.discussions
     if @discussion.update discussion_params
       flash[:notice] = "Discussion successfully updated!"
       redirect_to project

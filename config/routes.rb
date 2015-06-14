@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/home/about" => "home#about"
 
 
-
+  
   resources :projects do
     resources :tasks, :discussions
   end
