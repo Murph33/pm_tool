@@ -3,9 +3,6 @@
 <h3> <%= @discussion.description %></h3>
 
 
-
-
-
 <h5> Comments?</h5>
 
 <%= form_for [@discussion, @comment] do |f| %>
@@ -24,5 +21,5 @@
   <%= link_to "Edit", edit_discussion_comment_path(@discussion, comment) %>
   <%= link_to "Delete", discussion_comment_path(@discussion, comment),
       method: :delete, data: {confirm: "Do you really want to delete this comment?"}%>
-      
+
 <% end %>

@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @comment = Comment.new
   end
@@ -9,6 +11,7 @@ class CommentsController < ApplicationController
     discussion = Discussion.find params[:discussion_id]
     project = Project.find discussion.project_id
     @comment = Comment.new comment_params
+    @comment.user = current_user
     @comment.discussion = discussion
     if @comment.save
       flash[:notice] = "Comment successfully posted!"

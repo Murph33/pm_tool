@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
     @task = Task.new
   end
@@ -24,6 +26,7 @@ class TasksController < ApplicationController
     @task.project = @project
     @tasks = @project.tasks
     @discussions = @project.discussions
+    @task.user = current_user
     if @task.save
       flash[:notice] = "You've successfully created a task"
       redirect_to "/projects/#{(params[:project_id])}"

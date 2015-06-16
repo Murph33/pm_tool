@@ -1,5 +1,7 @@
 class DiscussionsController < ApplicationController
 
+  before_action :authenticate_user!, except: [:show]
+
   def show
     @discussion = Discussion.find params[:id]
     @comment = Comment.new
@@ -15,6 +17,7 @@ class DiscussionsController < ApplicationController
     @discussions = @project.discussions
     @discussion = Discussion.new discussion_params
     @discussion.project = @project
+    @discussion.user = current_user
     if @discussion.save
       flash[:notice] = "New discussion started"
       redirect_to project_path(params[:project_id])

@@ -7,11 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= link_to "Home",  root_path  %>
-<%= link_to "About", home_about_path %>
-<%= link_to "Projects", projects_path %>
-<%= link_to "Add a Project", new_project_path %>
+<%= link_to "Home",  root_path  %> |
+<%= link_to "About", home_about_path %> |
+<%= link_to "Projects", projects_path %> |
+<%= link_to "Add a Project", new_project_path %> |
+<% if user_signed_in? %>
+  <%= link_to "Edit Profile", edit_users_path %> |
+  <%= link_to "Logout", sessions_path, method: :delete %>
+<% end %>
+<% unless user_signed_in? %>
+  <%= link_to "Sign Up", new_user_path %> |
+  <%= link_to "Login", new_session_path %>
+<% end %>
 <hr>
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+
+<% end %>
+<% if flash[:alert] %>
+  <%= flash[:alert] %>
+<% end %>
+<br>
 <%= yield %>
 
 </body>
