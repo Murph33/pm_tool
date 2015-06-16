@@ -19,13 +19,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @discussion = Discussion.new
     @project = Project.find params[:project_id]
     task_params = params.require(:task).permit(:title, :description, :due_date)
     @task = Task.new task_params
     @task.project = @project
-    @tasks = @project.tasks
-    @discussions = @project.discussions
     @task.user = current_user
     if @task.save
       flash[:notice] = "You've successfully created a task"
@@ -39,13 +36,8 @@ class TasksController < ApplicationController
 
 
   def update
-    @discussion = Discussion.new
-    @project = Project.find params[:project_id]
     @task_params = params.require(:task).permit(:title, :description, :due_date, :done)
     @task = Task.find params[:id]
-    @task.project = @project
-    @tasks = @project.tasks
-    @discussions = @project.discussions
     if @task.update @task_params
       @task.done = params[:task][:done]
       flash[:notice] = "Task udpated!"
