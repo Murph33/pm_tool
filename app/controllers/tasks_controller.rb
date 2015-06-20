@@ -40,6 +40,9 @@ class TasksController < ApplicationController
     @task = Task.find params[:id]
     if @task.update @task_params
       @task.done = params[:task][:done]
+      if @task.done == true
+        TasksMailer.notify_task_owner(@task).deliver_now unless @task.user == current_user
+      end
       flash[:notice] = "Task udpated!"
       redirect_to "/projects/#{(params[:project_id])}"
     else

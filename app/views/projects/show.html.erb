@@ -28,8 +28,8 @@ Tags: <% @project.tags.each {|t| t.name} %>
       method: :delete, data: {confirm: "Do you really want to delete this project?"} %>
 </div>
 <%= @project.favourites.length %> people favourited this project!
-Add a task to this project?
-<br><br>
+<p>Add a task to this project?</p>
+
 <% if @task.errors.any? %>
   <% @task.errors.full_messages.each do |msg| %>
     <%= msg %>

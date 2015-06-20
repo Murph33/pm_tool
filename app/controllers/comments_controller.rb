@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.discussion = discussion
     if @comment.save
+      DiscussionsMailer.notify_discussion_owner(discussion).deliver_now unless @comment.user == discussion.user
       flash[:notice] = "Comment successfully posted!"
       redirect_to project_discussion_path(project, discussion)
     else
