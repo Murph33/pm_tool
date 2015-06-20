@@ -12,12 +12,22 @@
 <h3><%= @project.description %></h3>
 <%= @task_params %>
 Due: <%= formatted_date @project.due_date%>
-Tags: <% @project.tags.each {|t| t.name} %> 
+Tags: <% @project.tags.each {|t| t.name} %>
 <br><br>
-<div> <%= link_to "Edit", edit_project_path(@project) %>
-      <%= link_to "Delete", project_path(@project),
+<div>
+  <% unless @project.favourited_by? current_user %>
+    <% unless @project.user == current_user %>
+      <%= link_to "Favourite", project_favourites_path(@project), method: :post %>
+    <% end %>
+  <% else %>
+    <%= link_to "Unfavourite", project_favourite_path(@project, @favourite),
+          method: :delete %>
+  <% end %>
+  <%= link_to "Edit", edit_project_path(@project) %>
+  <%= link_to "Delete", project_path(@project),
       method: :delete, data: {confirm: "Do you really want to delete this project?"} %>
 </div>
+<%= @project.favourites.length %> people favourited this project!
 Add a task to this project?
 <br><br>
 <% if @task.errors.any? %>

@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  has_many :favourites, dependent: :destroy
+  has_many :favourite_projects, through: :favourites, source: :project
+
   has_many :collaborations, dependent: :destroy
   has_many :collaborated_projects, through: :collaborations, source: :project
 
@@ -17,6 +20,10 @@ class User < ActiveRecord::Base
   def self.exclude_users users
     users.delete nil
     where('id not in (?)', users)
+  end
+
+  def favourited_by? project
+    current_user.favourite_projects.include?(project)
   end
 
 end

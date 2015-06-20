@@ -70,6 +70,7 @@ class ProjectsController < ApplicationController
     @tasks_done = Task.where("done = true AND project_id = #{params[:id]}")
     @tasks_not_done = Task.where("done = false AND project_id = #{params[:id]}")
     @discussions = @project.discussions
+    @favourite = @project.favourite_for current_user
   end
 
   private

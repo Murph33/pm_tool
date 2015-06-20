@@ -13,11 +13,15 @@
 <%= link_to "Add a Project", new_project_path %> |
 <% if user_signed_in? %>
   <%= link_to "Edit Profile", edit_users_path %> |
-  <%= link_to "Logout", sessions_path, method: :delete %>
+  <%= link_to "Logout", sessions_path, method: :delete %> |
 <% end %>
 <% unless user_signed_in? %>
   <%= link_to "Sign Up", new_user_path %> |
-  <%= link_to "Login", new_session_path %>
+  <%= link_to "Login", new_session_path %> |
+<% end %>
+<% if current_user.favourites.any? %>
+  <%= link_to "View Your #{current_user.favourites.length} Favourites",
+      favourites_path %>
 <% end %>
 <hr>
 <% if flash[:notice] %>

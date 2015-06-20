@@ -1,0 +1,6 @@
+<h1> Your Favourite Projects!</h1>
+<ul>
+<% current_user.favourite_projects.each do |project| %>
+  <li><%=  link_to project.title, project %>
+<% end %>
+</ul>

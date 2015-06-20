@@ -7,12 +7,15 @@ Rails.application.routes.draw do
 
   get "/home/about" => "home#about"
 
+  resources :favourites, only: [:index]
+
   resources :users, only: [:new, :create] do
     get :edit, on: :collection
     patch :update, on: :collection
   end
 
   resources :projects do
+    resources :favourites, only: [:create, :destroy, :update]
     resources :tasks, :discussions
   end
 
