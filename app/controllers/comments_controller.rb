@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
       redirect_to project_discussion_path(project, discussion)
     else
       flash[:alert] = "Something went wrong!"
-      render "/discussions/show"
+      redirect_to project_discussion_path(project, discussion)
     end
   end
 

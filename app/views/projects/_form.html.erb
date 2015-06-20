@@ -17,5 +17,10 @@
     <%= f.label :due_date %>
     <%= f.datetime_select :due_date, start_year: Date.today.year %>
   </div>
+  <div>
+    <%= f.label :collaborators %>
+    <%= f.collection_check_boxes :collaborating_user_ids, User.exclude_users([current_user, @project.user]),
+                                  :id, :full_name %>
+  </div>
   <%= f.submit %>
 <% end %>

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+  before_action :find_project, only: [:edit, :create]
   before_action :authenticate_user!
 
   def new
@@ -28,11 +28,11 @@ class TasksController < ApplicationController
       flash[:notice] = "You've successfully created a task"
       redirect_to "/projects/#{(params[:project_id])}"
     else
+      @discussion = Discussion.new
       flash[:alert] = "Something went wrong here"
       render "/projects/show"
     end
   end
-
 
 
   def update
@@ -47,4 +47,11 @@ class TasksController < ApplicationController
       render :edit
     end
   end
+
+  private
+
+  def find_project
+    @project = Project.find params[:project_id]
+  end
+
 end

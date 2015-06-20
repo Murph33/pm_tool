@@ -1,5 +1,8 @@
 class Project < ActiveRecord::Base
 
+  has_many :collaborations, dependent: :destroy
+  has_many :collaborating_users, through: :collaborations, source: :user
+
   has_many :tasks, dependent: :destroy
   has_many :discussions, dependent: :destroy
 
@@ -10,5 +13,14 @@ class Project < ActiveRecord::Base
   def self.search term
     Project.where("title ILIKE :term OR description ILIKE :term", {term: "%#{term}%"})
   end
+
+  def tasks_done
+    tasks.done
+  end
+
+  def tasks_undone
+    tasks.undone
+  end
+
 
 end

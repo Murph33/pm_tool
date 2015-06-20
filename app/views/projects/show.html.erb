@@ -1,3 +1,12 @@
+<h4>Project Manager: <%= @project.user.full_name %></h4>
+<div>Project Collaborators
+<ul>
+
+  <%  @project.collaborating_users.each do |user| %>
+    <li><%= user.full_name %></li>
+  <% end %>
+</ul>
+</div>
 <h1><%= @project.title %></h1>
 
 <h3><%= @project.description %></h3>
@@ -34,7 +43,7 @@ Add a task to this project?
 
 <% end %>
 <h3> Incomplete Tasks </h3>
-<% @tasks_not_done.each do |task| %>
+<% @project.tasks_undone.each do |task| %>
 
   <h4><%= task.title %></h4>
   <p><%= task.description %></p>
@@ -48,7 +57,7 @@ Add a task to this project?
 <% end %>
 
 <h3> Completed Tasks</h3>
-<% @tasks_done.each do |task| %>
+<% @project.tasks_done.each do |task| %>
 
   <h4><%= task.title %></h4>
   <p><%= task.description %></p>
@@ -62,6 +71,7 @@ Add a task to this project?
 <% end %>
 
 <h4> Have something to talk about?</h4>
+
 <% if @discussion.errors.any? %>
   <% @discussion.errors.full_messages.each do |msg| %>
     <%= msg %>
@@ -82,7 +92,7 @@ Add a task to this project?
 
 <h3> Discussions</h3>
 
-<% @discussions.each do |discussion| %>
+<% @project.discussions.each do |discussion| %>
 <hr>
   <div>
     <h2>
