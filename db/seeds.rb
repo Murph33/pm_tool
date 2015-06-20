@@ -12,3 +12,8 @@
   time = (rand(10+1)).days.from_now
   Project.create title: name, description: description, due_date: time
 end
+
+
+
+# ["Research & Development", "Human Resources", "Marketing", "Sales",
+#   "Information Technologies", "Management"].each {|el| Tag.create name:el}

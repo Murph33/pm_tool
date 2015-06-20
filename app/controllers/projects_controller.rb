@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
 
   def update
     project_params = params.require(:project).permit(:title, :description,
-                                {collaborating_user_ids: []},  :due_date)
+                      {tag_ids: []}, {collaborating_user_ids: []},  :due_date)
 
     @project = Project.find params[:id]
     project_params[:collaborating_user_ids] << current_user.id unless @project.user == current_user
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
 
   def create
     project_params = params.require(:project).permit(:title, :description,
-                                {collaborating_user_ids: []},  :due_date)
+                      {tag_ids: []}, {collaborating_user_ids: []},  :due_date)
     @project = Project.new project_params
     @project.user = current_user
     if @project.save

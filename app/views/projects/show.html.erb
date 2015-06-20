@@ -12,7 +12,7 @@
 <h3><%= @project.description %></h3>
 <%= @task_params %>
 Due: <%= formatted_date @project.due_date%>
-
+Tags: <% @project.tags.each {|t| t.name} %> 
 <br><br>
 <div> <%= link_to "Edit", edit_project_path(@project) %>
       <%= link_to "Delete", project_path(@project),

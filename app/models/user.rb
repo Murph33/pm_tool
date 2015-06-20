@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def self.exclude_users users
+    users.delete nil
     where('id not in (?)', users)
   end
 
