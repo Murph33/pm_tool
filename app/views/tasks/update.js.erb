@@ -1,0 +1,4 @@
+var target = $('#<%= dom_id(@task, :edit) %>')
+target.fadeOut(300, function() {
+  target.replaceWith("<%= j render 'task', task: @task %>")
+})

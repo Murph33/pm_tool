@@ -30,56 +30,21 @@ Tags: <% @project.tags.each {|t| t.name} %>
 <%= @project.favourites.length %> people favourited this project!
 <p>Add a task to this project?</p>
 
-<% if @task.errors.any? %>
-  <% @task.errors.full_messages.each do |msg| %>
-    <%= msg %>
-  <% end %>
-<% end %>
 
-<%= form_for [@project, @task] do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div>
-    <%= f.label :due_date %>
-    <%= f.datetime_select :due_date, start_year: Date.today.year %>
-  </div>
-  <%= f.submit %>
 
-<% end %>
+<%= render "/tasks/form" %>
 <h3> Incomplete Tasks </h3>
-<% @project.tasks_undone.each do |task| %>
-
-  <h4><%= task.title %></h4>
-  <p><%= task.description %></p>
-  <p>Due: <%= formatted_date task.due_date %></p>
-  <% status = task.done ? "Done" : "Not Done" %>
-  <%= link_to status, project_task_path(@project,task, task: {done: !task.done}), method: :patch  %>
-  <%= link_to "Edit", edit_project_task_path(@project, task) %>
-  <%= link_to "Delete", project_task_path(@project, task), method: :delete,
-                data: {confirm: "Are you sure you want to delete this task?"}%>
-  <hr>
-<% end %>
-
+<div id="incomplete_tasks">
+  <% @project.tasks_undone.each do |task| %>
+    <%= render "tasks/task", task: task %>
+  <% end %>
+</div>
 <h3> Completed Tasks</h3>
-<% @project.tasks_done.each do |task| %>
-
-  <h4><%= task.title %></h4>
-  <p><%= task.description %></p>
-  <p>Due: <%= formatted_date task.due_date %></p>
-  <% status = task.done ? "Done" : "Not Done" %>
-  <%= link_to status, project_task_path(@project,task, task: {done: !task.done}), method: :patch  %>
-  <%= link_to "Edit", edit_project_task_path(@project, task) %>
-  <%= link_to "Delete", project_task_path(@project, task), method: :delete,
-                data: {confirm: "Are you sure you want to delete this task?"}%>
-  <hr>
-<% end %>
-
+<div id="completed_tasks">
+  <% @project.tasks_done.each do |task| %>
+    <%= render "tasks/task", task: task %>
+  <% end %>
+</div>
 <h4> Have something to talk about?</h4>
 
 <% if @discussion.errors.any? %>

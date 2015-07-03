@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: pm_tool_production
-  username: pm_tool
-  password: <%= ENV['PM_TOOL_DATABASE_PASSWORD'] %>
+  database: pm_tool_development

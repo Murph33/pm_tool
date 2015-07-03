@@ -1,0 +1,13 @@
+$('#<%= dom_id(@task) %>').fadeOut(200)
+
+<%# debugger %>
+setTimeout(function() {
+  $('#<%= dom_id(@task) %>').remove()
+  <% if @task.done == true %>
+
+  $('#completed_tasks').prepend('<%= j render "task", project: @project, task: @task %>')
+
+  <% else %>
+  $('#incomplete_tasks').prepend('<%= j render "task", project: @project, task: @task %>')
+  <% end %>
+},300);

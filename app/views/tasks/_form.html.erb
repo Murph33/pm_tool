@@ -1,0 +1,22 @@
+<%= form_for [@project, @task], remote: true do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :due_date %>
+    <%= f.datetime_select :due_date, start_year: Date.today.year %>
+  </div>
+  <%= f.submit %>
+<br>
+  <% if @task.errors.any? %>
+    <% @task.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+
+<% end %>

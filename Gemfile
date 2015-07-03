@@ -17,7 +17,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'cancancan'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
-
+gem 'whenever'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
